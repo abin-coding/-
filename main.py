@@ -25,13 +25,23 @@ def getImgcssjs(html,output_dir):
     img = r'<img src="(.+?\.jpg)" alt='
     imgre = re.compile(img)
     imglist = imgre.findall(html)
-    imgdir=updir+'\\'+'mages'
+    imgdir=updir+'\\'+'images'
     os.mkdir(imgdir)
     for imgurl in imglist:
         filename = imgurl.split("/")[-1]
         outpath = os.path.join(imgdir,filename)
         urllib.urlretrieve(imgurl,outpath)    
-        """抓取图片并保存""" 
+        """抓取七张大图图片并保存""" 
+
+    img = r'original="(.+?\.jpg)"'
+    imgre = re.compile(img)
+    imglist = imgre.findall(html)
+    for imgurl in imglist:
+        filename = imgurl.split("/")[-1]
+        outpath = os.path.join(imgdir,filename)
+        urllib.urlretrieve(imgurl,outpath)
+    """抓取各分栏的图片"""
+    
 
     js = r'<script type="text/javascript" src="(.+?\.js)">'
     jsre = re.compile(js)
