@@ -62,6 +62,16 @@ def getImgcssjs(html,output_dir):
     req = urllib2.Request(url) 
     con = urllib2.urlopen( req )
     msg = con.read()
+    original = r'<i class="img"><img src=".+?\.jpg" original="(.+?\.jpg)"'
+    originalre =re.compile(original)
+    originallist = originalre.findall(msg)
+    for x in originallist:
+        replaces = r'<i class="img"><img src="(.+?\.jpg)" original='+x
+        replacesre = re.compile(replaces)
+        replaceslist = replacesre.findall(msg)
+        filename=x.split("/")[-1]
+        place = updir+'\\'+"index.html"+"\\"+filename
+        msg = msg.replace(replacelist,place)
     file_object = open(savefilepath,'wb')
     file_object.write(msg)
     file_object.close()
@@ -81,11 +91,10 @@ if __name__ == "__main__":
     url=""
     output_file=""
     for op, value in opts:
-    	if op == "-d":
-        	average_time = value
-    	elif op == "-u":
-        	url = value
-    	elif op == "-o":
-    		output_dir = value
+        if op == "-d":
+            average_time = value
+        elif op == "-u":
+            url = value
+        elif op == "-o":
+            output_dir = value
     main(average_time,url,output_dir)
-	
