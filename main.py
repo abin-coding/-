@@ -68,7 +68,7 @@ def getImgcssjs(html,output_dir):
     for x in originallist:
         filename = x[1].split("/")[-1]
         imgdir=updir+'\\'+'images'+'\\'+filename
-        msg = msg.replace(x[0],imgdir)
+        msg = msg.replace(x[0],imgdir，1)
     file_object = open(savefilepath,'wb')
     file_object.write(msg)
     file_object.close()
