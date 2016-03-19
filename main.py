@@ -64,14 +64,14 @@ def getImgcssjs(html,output_dir):
     msg = con.read()
     original = r'<i class="img"><img src=".+?\.jpg" original="(.+?\.jpg)"'
     originalre =re.compile(original)
-    originallist = originalre.findall(msg)
+    originallist = originalre.findall(html)
     for x in originallist:
         replaces = r'<i class="img"><img src="(.+?\.jpg)" original='+x
         replacesre = re.compile(replaces)
         replaceslist = replacesre.findall(msg)
         filename=x.split("/")[-1]
         place = updir+'\\'+"index.html"+"\\"+filename
-        msg = msg.replace(replacelist,place)
+        msg = msg.replace(replaceslist,place)
     file_object = open(savefilepath,'wb')
     file_object.write(msg)
     file_object.close()
